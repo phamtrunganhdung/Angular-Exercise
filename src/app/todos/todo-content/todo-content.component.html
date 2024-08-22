@@ -1,0 +1,33 @@
+<div
+  class="w-full flex flex-col justify-center items-start max-w-md mx-auto max-h-96 overflow-y-auto overflow-x-hidden shadow-md rounded-lg no-scrollbar"
+  [ngClass]="listTodo.length > 0 ? 'border border-gray-100' : ''"
+>
+  @for (todo of listTodo; track todo.id) {
+  <div
+    class="flex justify-start items-center gap-3 w-full text-xl border-b border-gray-100 py-2 px-5 group"
+  >
+    <input
+      type="checkbox"
+      (change)="handleChangeStatus($event, todo.id)"
+      class="w-5 h-5"
+      [checked]="todo.status === 'completed' ? true : false"
+    />
+    <p
+      class="flex-1"
+      [ngClass]="
+        todo.status === 'completed'
+          ? 'line-through italic text-gray-500'
+          : 'no-underline not-italic text-black'
+      "
+    >
+      {{ todo.name }}
+    </p>
+    <button
+      class="bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs px-1 py-1 hidden group-hover:block"
+      (click)="handleRemoveTodo(todo.id)"
+    >
+      Remove
+    </button>
+  </div>
+  }
+</div>

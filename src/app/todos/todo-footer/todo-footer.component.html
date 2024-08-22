@@ -1,0 +1,24 @@
+<div
+  class="text-sm w-full justify-between items-center max-w-md mx-auto mt-3 py-2 px-5"
+  [ngClass]="lengthAll > 0 ? 'flex' : 'hidden'"
+>
+  <p class="font-semibold">{{ lengthActive }} items left</p>
+  <div class="flex gap-2">
+    @for (fil of listFilter; track fil.key) {
+    <button
+      class="rounded-lg px-2 py-1 hover:border-indigo-700 border border-transparent"
+      (click)="handleFilterStatus(fil.key)"
+      [ngClass]="{ 'text-white bg-indigo-700': filter === fil.key }"
+    >
+      {{ fil.title }}
+    </button>
+    }
+  </div>
+  <button
+    class="rounded-lg px-1 py-1 hover:border-indigo-700 border border-transparent active:text-white active:bg-indigo-700"
+    [ngClass]="lengthAll - lengthActive === 0 ? 'opacity-0' : 'opacity-100'"
+    (click)="handleClearCompleted()"
+  >
+    Clear Completed
+  </button>
+</div>
