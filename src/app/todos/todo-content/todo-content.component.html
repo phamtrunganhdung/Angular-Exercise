@@ -3,31 +3,49 @@
   [ngClass]="listTodo.length > 0 ? 'border border-gray-100' : ''"
 >
   @for (todo of listTodo; track todo.id) {
-  <div
-    class="flex justify-start items-center gap-3 w-full text-xl border-b border-gray-100 py-2 px-5 group"
-  >
+  <div class="flex w-full text-xl border-b border-gray-100 py-2 px-5 group">
     <input
-      type="checkbox"
-      (change)="handleChangeStatus($event, todo.id)"
-      class="w-5 h-5"
-      [checked]="todo.status === 'completed' ? true : false"
-    />
-    <p
-      class="flex-1"
+      #editTodo
+      [id]="todo.id"
+      class="rounded-lg border border-transparent focus-visible:border-green-700 focus-visible:outline-none"
       [ngClass]="
-        todo.status === 'completed'
-          ? 'line-through italic text-gray-500'
-          : 'no-underline not-italic text-black'
+        idEditTodo === todo.id
+          ? 'w-full h-9 visible px-3 py-1'
+          : 'invisible w-0 h-0 p-0'
+      "
+      (keydown.enter)="handleEditStatus($event, todo.id)"
+    />
+    <div
+      class="flex justify-start items-center gap-3"
+      [ngClass]="
+        idEditTodo === todo.id ? 'invisible w-0 h-0' : 'w-full h-9 visible'
       "
     >
-      {{ todo.name }}
-    </p>
-    <button
-      class="bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs px-1 py-1 hidden group-hover:block"
-      (click)="handleRemoveTodo(todo.id)"
-    >
-      Remove
-    </button>
+      <input
+        type="checkbox"
+        (change)="handleChangeStatus($event, todo.id)"
+        class="w-5 h-5"
+        [checked]="todo.status === 'completed' ? true : false"
+      />
+      <label
+        class="flex-1 cursor-pointer w-full min-h-8"
+        [ngClass]="
+          todo.status === 'completed'
+            ? 'line-through italic text-gray-500'
+            : 'no-underline not-italic text-black'
+        "
+        (dblclick)="handleEditTodo(todo.id)"
+      >
+        {{ todo.name }}
+      </label>
+
+      <button
+        class="bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs px-1 py-1 hidden group-hover:block"
+        (click)="handleRemoveTodo(todo.id)"
+      >
+        Remove
+      </button>
+    </div>
   </div>
   }
 </div>

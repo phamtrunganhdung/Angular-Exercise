@@ -9,36 +9,36 @@ import { ToDoItems } from '../../app.component';
 })
 export class TodoService {
   listTodoSubject = new BehaviorSubject<ToDoItems[]>([
-    // {
-    //   id: 1,
-    //   name: 'di da banh',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 2,
-    //   name: 'di hoc',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 3,
-    //   name: 'di ngu',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 4,
-    //   name: 'di boi',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 5,
-    //   name: 'di danh bi-a',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 6,
-    //   name: 'di cho',
-    //   status: 'active',
-    // },
+    {
+      id: 1,
+      name: 'di da banh',
+      status: 'active',
+    },
+    {
+      id: 2,
+      name: 'di hoc',
+      status: 'active',
+    },
+    {
+      id: 3,
+      name: 'di ngu',
+      status: 'active',
+    },
+    {
+      id: 4,
+      name: 'di boi',
+      status: 'active',
+    },
+    {
+      id: 5,
+      name: 'di danh bi-a',
+      status: 'active',
+    },
+    {
+      id: 6,
+      name: 'di cho',
+      status: 'active',
+    },
   ]);
   listTodo$ = this.listTodoSubject.asObservable();
 
