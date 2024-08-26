@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 
-import { ToDoItems } from '../../app.component';
-import { TodoService } from '../service/todo.service';
+import { ToDoItems } from '../../interface';
+import { TodoService } from '../../service/todo.service';
 
 interface TodoFilter {
   key: 'all' | 'active' | 'completed';

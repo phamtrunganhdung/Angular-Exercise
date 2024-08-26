@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 
-import { ToDoItems } from '../../app.component';
+import { ToDoItems } from '../interface';
 
 @Injectable({
   providedIn: 'root',

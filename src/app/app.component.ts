@@ -1,17 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterModule, RouterOutlet } from '@angular/router';
 
-import { TodoContentComponent } from './todos/todo-content/todo-content.component';
-import { TodoFooterComponent } from './todos/todo-footer/todo-footer.component';
-import { TodoHeaderComponent } from './todos/todo-header/todo-header.component';
-
-export interface ToDoItems {
-  id: number;
-  name: string;
-  status: string;
-}
+import { Tabs } from './interface';
+import { TodoAppComponent } from './todo-app/todo-app.component';
 
 @Component({
   selector: 'app-root',
@@ -20,10 +13,27 @@ export interface ToDoItems {
     RouterOutlet,
     FormsModule,
     CommonModule,
-    TodoHeaderComponent,
-    TodoContentComponent,
-    TodoFooterComponent,
+    TodoAppComponent,
+    RouterModule,
   ],
   templateUrl: './app.component.html',
 })
-export class AppComponent {}
+export class AppComponent {
+  constructor(private router: Router) {}
+  tabs: Tabs[] = [
+    {
+      id: 'todo',
+      path: '/todo-app',
+      name: 'Todo App',
+    },
+    {
+      id: 'listUser',
+      path: '/list-user',
+      name: 'List User',
+    },
+  ];
+
+  isRouteActive(route: string): boolean {
+    return this.router.url === route;
+  }
+}

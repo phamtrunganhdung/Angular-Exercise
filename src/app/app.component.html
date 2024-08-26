@@ -1,3 +1,24 @@
-<app-todo-header></app-todo-header>
-<app-todo-content></app-todo-content>
-<app-todo-footer></app-todo-footer>
+<div class="flex flex-col gap-3 py-10">
+  <nav>
+    <ul class="flex justify-center items-center gap-5">
+      @for (tab of tabs; track tab.id) {
+      <li
+        class="text-2xl font-semibold cursor-pointer hover:underline"
+        [ngClass]="
+          isRouteActive(tab.path)
+            ? 'text-green-600 underline hover:text-green-700'
+            : 'text-gray-500'
+        "
+      >
+        <a
+          routerLink="{{ tab.path }}"
+          routerLinkActive="active"
+          ariaCurrentWhenActive="page"
+          >{{ tab.name }}</a
+        >
+      </li>
+      }
+    </ul>
+  </nav>
+  <router-outlet></router-outlet>
+</div>
