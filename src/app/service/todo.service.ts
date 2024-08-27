@@ -8,7 +8,7 @@ import { ToDoItems } from '../interface';
   providedIn: 'root',
 })
 export class TodoService {
-  listTodoSubject = new BehaviorSubject<ToDoItems[]>([]);
+  private listTodoSubject = new BehaviorSubject<ToDoItems[]>([]);
   listTodo$ = this.listTodoSubject.asObservable();
 
   private filterStatusSubject = new BehaviorSubject<
@@ -21,7 +21,7 @@ export class TodoService {
   }
   addNewTodo(newTodoName: string) {
     const newLst = this.listTodoSubject.value;
-    const newId = new Date().toString();
+    const newId = Date.now().toString();
     newLst.push({
       id: newId,
       name: newTodoName,

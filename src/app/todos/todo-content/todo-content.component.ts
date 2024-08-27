@@ -18,6 +18,7 @@ import { TodoService } from '../../service/todo.service';
 })
 export class TodoContentComponent {
   listTodo: ToDoItems[] = [];
+  listTodoHaveNotFilter: ToDoItems[] = [];
   idEditTodo!: string;
   @ViewChildren('editTodo') editInput!: QueryList<
     ElementRef<HTMLButtonElement>
@@ -38,9 +39,12 @@ export class TodoContentComponent {
     this.todoService.filteredTodos$.subscribe((todo) => {
       this.listTodo = todo;
     });
+    this.todoService.listTodo$.subscribe((todo) => {
+      this.listTodoHaveNotFilter = todo;
+    });
   }
   handleChangeStatus(event: any, id: string) {
-    const newTodo = [...this.todoService.listTodoSubject.value];
+    const newTodo = [...this.listTodoHaveNotFilter];
     const todoChangeIdx: number = newTodo.findIndex(
       (td: ToDoItems) => td.id === id
     );
@@ -52,13 +56,13 @@ export class TodoContentComponent {
     this.todoService.updateListTodo(newTodo);
   }
   handleRemoveTodo(id: string) {
-    const newTodo = [...this.todoService.listTodoSubject.value].filter(
+    const newTodo = [...this.listTodoHaveNotFilter].filter(
       (todo: ToDoItems) => todo.id !== id
     );
     this.todoService.updateListTodo(newTodo);
   }
   handleEditTodo(id: string) {
-    const newTodo = [...this.todoService.listTodoSubject.value];
+    const newTodo = [...this.listTodoHaveNotFilter];
     const todoFind: ToDoItems | undefined = newTodo.find(
       (td: ToDoItems) => td.id === id
     );
@@ -73,7 +77,7 @@ export class TodoContentComponent {
       }, 50);
   }
   handleEditStatus(event: any, id: string) {
-    const newTodo = [...this.todoService.listTodoSubject.value];
+    const newTodo = [...this.listTodoHaveNotFilter];
     const todoChangeIdx: number = newTodo.findIndex(
       (td: ToDoItems) => td.id === id
     );
