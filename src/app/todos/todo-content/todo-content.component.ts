@@ -18,7 +18,7 @@ import { TodoService } from '../../service/todo.service';
 })
 export class TodoContentComponent {
   listTodo: ToDoItems[] = [];
-  idEditTodo!: number;
+  idEditTodo!: string;
   @ViewChildren('editTodo') editInput!: QueryList<
     ElementRef<HTMLButtonElement>
   >;
@@ -28,7 +28,7 @@ export class TodoContentComponent {
         (x) => x.nativeElement.id === this.idEditTodo.toString()
       );
       if (inputFocus && e.target !== inputFocus.nativeElement) {
-        this.idEditTodo = 0;
+        this.idEditTodo = '';
         inputFocus.nativeElement.value = '';
       }
     });
@@ -39,7 +39,7 @@ export class TodoContentComponent {
       this.listTodo = todo;
     });
   }
-  handleChangeStatus(event: any, id: number) {
+  handleChangeStatus(event: any, id: string) {
     const newTodo = [...this.todoService.listTodoSubject.value];
     const todoChangeIdx: number = newTodo.findIndex(
       (td: ToDoItems) => td.id === id
@@ -51,13 +51,13 @@ export class TodoContentComponent {
     else newTodo[todoChangeIdx].status = 'active';
     this.todoService.updateListTodo(newTodo);
   }
-  handleRemoveTodo(id: number) {
+  handleRemoveTodo(id: string) {
     const newTodo = [...this.todoService.listTodoSubject.value].filter(
       (todo: ToDoItems) => todo.id !== id
     );
     this.todoService.updateListTodo(newTodo);
   }
-  handleEditTodo(id: number) {
+  handleEditTodo(id: string) {
     const newTodo = [...this.todoService.listTodoSubject.value];
     const todoFind: ToDoItems | undefined = newTodo.find(
       (td: ToDoItems) => td.id === id
@@ -72,7 +72,7 @@ export class TodoContentComponent {
         inputFocus.nativeElement.value = todoFind?.name || '';
       }, 50);
   }
-  handleEditStatus(event: any, id: number) {
+  handleEditStatus(event: any, id: string) {
     const newTodo = [...this.todoService.listTodoSubject.value];
     const todoChangeIdx: number = newTodo.findIndex(
       (td: ToDoItems) => td.id === id
@@ -80,6 +80,6 @@ export class TodoContentComponent {
     if (todoChangeIdx === -1) return;
     newTodo[todoChangeIdx].name = event.target?.value;
     this.todoService.updateListTodo(newTodo);
-    this.idEditTodo = 0;
+    this.idEditTodo = '';
   }
 }

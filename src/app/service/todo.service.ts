@@ -8,38 +8,7 @@ import { ToDoItems } from '../interface';
   providedIn: 'root',
 })
 export class TodoService {
-  listTodoSubject = new BehaviorSubject<ToDoItems[]>([
-    // {
-    //   id: 1,
-    //   name: 'di da banh',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 2,
-    //   name: 'di hoc',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 3,
-    //   name: 'di ngu',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 4,
-    //   name: 'di boi',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 5,
-    //   name: 'di danh bi-a',
-    //   status: 'active',
-    // },
-    // {
-    //   id: 6,
-    //   name: 'di cho',
-    //   status: 'active',
-    // },
-  ]);
+  listTodoSubject = new BehaviorSubject<ToDoItems[]>([]);
   listTodo$ = this.listTodoSubject.asObservable();
 
   private filterStatusSubject = new BehaviorSubject<
@@ -52,8 +21,9 @@ export class TodoService {
   }
   addNewTodo(newTodoName: string) {
     const newLst = this.listTodoSubject.value;
+    const newId = new Date().toString();
     newLst.push({
-      id: newLst.length + 1,
+      id: newId,
       name: newTodoName,
       status: 'active',
     });
