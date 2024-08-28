@@ -21,7 +21,6 @@ import { TodoStore } from '../../../todo-app-component-store/todo.store';
 export class TodoContentNgRxComponent {
   todo$!: Observable<ToDoItems[]>;
   todoFilter$!: Observable<ToDoItems[]>;
-  listTodoHaveNotFilter: ToDoItems[] = [];
   idEditTodo!: string;
   @ViewChildren('editTodo') editInput!: QueryList<
     ElementRef<HTMLButtonElement>
