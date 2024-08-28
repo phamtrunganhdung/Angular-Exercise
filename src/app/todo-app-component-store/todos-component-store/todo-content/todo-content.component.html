@@ -1,0 +1,51 @@
+<div
+  class="w-full max-w-md mx-auto max-h-96 overflow-y-auto overflow-x-hidden shadow-md rounded-lg"
+  [ngClass]="(todoFilter$ | async)?.length ? 'border border-gray-100' : ''"
+>
+  @for (todo of (todoFilter$ | async); track todo.id) {
+  <div class="flex w-full text-xl border-b border-gray-100 py-2 px-5 group">
+    <input
+      #editTodo
+      [id]="todo.id"
+      class="rounded-lg border border-transparent focus-visible:border-green-700 focus-visible:outline-none"
+      [ngClass]="
+        idEditTodo === todo.id
+          ? 'w-full h-9 visible px-3 py-1'
+          : 'invisible w-0 h-0 p-0'
+      "
+      (keydown.enter)="handleEditStatus($event, todo.id)"
+    />
+    <div
+      class="flex justify-start items-center gap-3"
+      [ngClass]="
+        idEditTodo === todo.id ? 'invisible w-0 h-0' : 'w-full h-9 visible'
+      "
+    >
+      <input
+        type="checkbox"
+        (change)="handleChangeStatus($event, todo.id)"
+        class="w-5 h-5"
+        [checked]="todo.status === 'completed' ? true : false"
+      />
+      <label
+        class="flex-1 cursor-pointer w-full min-h-8"
+        [ngClass]="
+          todo.status === 'completed'
+            ? 'line-through italic text-gray-500'
+            : 'no-underline not-italic text-black'
+        "
+        (dblclick)="handleEditTodo(todo.id)"
+      >
+        {{ todo.name }}
+      </label>
+
+      <button
+        class="bg-rose-600 hover:bg-rose-500 text-white rounded-lg text-xs px-1 py-1 hidden group-hover:block"
+        (click)="handleRemoveTodo(todo.id)"
+      >
+        Remove
+      </button>
+    </div>
+  </div>
+  }
+</div>

@@ -4,6 +4,11 @@ export interface ToDoItems {
   status: string;
 }
 
+export interface TodoState {
+  todo: ToDoItems[];
+  filterStatus: 'all' | 'active' | 'completed';
+}
+
 export interface Tabs {
   id: string;
   name: string;
@@ -24,4 +29,14 @@ export interface UserPage {
   total: number;
   total_pages: number;
   data: User[];
+}
+
+export interface Movie {
+  id: string;
+  name: string;
+}
+
+export interface MoviesState {
+  movies: Movie[];
+  userPreferredMoviesIds: string[];
 }

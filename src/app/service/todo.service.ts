@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, combineLatest, map } from 'rxjs';
 
 import { ToDoItems } from '../interface';
+import { CommonService } from './common.service';
 
 @Injectable({
   providedIn: 'root',
@@ -16,12 +17,14 @@ export class TodoService {
   >('all');
   filterStatus$ = this.filterStatusSubject.asObservable();
 
+  constructor(private readonly commonService: CommonService) {}
+
   updateListTodo(newList: ToDoItems[]) {
     this.listTodoSubject.next([...newList]);
   }
   addNewTodo(newTodoName: string) {
     const newLst = this.listTodoSubject.value;
-    const newId = Date.now().toString();
+    const newId = this.commonService.generateNewId();
     newLst.push({
       id: newId,
       name: newTodoName,

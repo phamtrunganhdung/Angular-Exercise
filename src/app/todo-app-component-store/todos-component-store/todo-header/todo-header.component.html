@@ -1,0 +1,18 @@
+<div class="flex flex-col w-full justify-center items-center gap-10 my-10">
+  <h1 class="text-6xl text-indigo-700 font-extrabold">TODO LIST</h1>
+  <div class="flex gap-2">
+    <button
+      class="bg-green-600 text-white rounded-lg text-base px-3 hover:bg-green-500 min-w-32"
+      (click)="handleActiveAll()"
+      [ngClass]="(todo$ | async)?.length ? 'block' : 'hidden'"
+    >
+      {{ isCplAll ? "Active All" : "Completed All" }}
+    </button>
+    <input
+      class="rounded-lg border border-gray-400 px-6 py-3 w-80 focus-visible:border-green-700 focus-visible:border focus-visible:outline-none"
+      placeholder="To do something!"
+      [(ngModel)]="inputValue"
+      (keyup.enter)="handleTodoOutput()"
+    />
+  </div>
+</div>

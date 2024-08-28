@@ -1,0 +1,4 @@
+<input class="border" [(ngModel)]="inputVal" (keyup.enter)="addMovie()" />
+@for (movie of (movies$ | async); track movie.id) {
+<div>{{ movie.name }}</div>
+}

@@ -7,8 +7,8 @@ import {
   ViewChildren,
 } from '@angular/core';
 
-import { ToDoItems } from '../../interface';
-import { TodoService } from '../../service/todo.service';
+import { ToDoItems } from '../../../interface';
+import { TodoService } from '../../../service/todo.service';
 
 @Component({
   selector: 'app-todo-content',

@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { ToDoItems } from '../../interface';
-import { TodoService } from '../../service/todo.service';
+import { ToDoItems } from '../../../interface';
+import { TodoService } from '../../../service/todo.service';
 
 @Component({
   selector: 'app-todo-header',
